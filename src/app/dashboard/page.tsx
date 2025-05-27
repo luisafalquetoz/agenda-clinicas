@@ -9,7 +9,6 @@ import { auth } from "@/lib/auth";
 import SignOutButton from "./components/sign-out-button";
 
 const DashboardPage = async () => {
-    
   const session = await auth.api.getSession({
     headers: await headers(),
   });
