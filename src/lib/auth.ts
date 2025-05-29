@@ -5,6 +5,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import * as schema from "@/db/schema";
+import { usersToClinicsTable } from "@/db/schema";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -26,6 +27,7 @@ export const auth = betterAuth({
           clinic: true,
         },
       });
+      // TO-DO: Ao adaptar para o usuário ter múltiplas clínicas, deve-se mudar esse código
       const clinic = clinics?.[0];
       return {
         user: {
