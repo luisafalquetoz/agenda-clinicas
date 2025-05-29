@@ -1,9 +1,11 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useAction } from "next-safe-action/hooks";
 import { useForm } from "react-hook-form";
 import { NumericFormat } from "react-number-format";
+import { toast } from "sonner";
 import { z } from "zod";
-import { useAction } from "next-safe-action/hooks";
 
+import { upsertDoctor } from "@/actions/upsert-doctor";
 import { Button } from "@/components/ui/button";
 import {
   DialogContent,
@@ -29,10 +31,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { doctorsTable } from "@/db/schema";
 
 import { medicalSpecialties } from "../constants";
-import { upsertDoctor } from "@/actions/upsert-doctor";
-import { toast } from "sonner";
 
 const formSchema = z
   .object({
@@ -65,27 +66,24 @@ const formSchema = z
     },
   );
 
-  interface UpsertDoctorFormProps {
-    onSuccess?: () => void;
-  }
+interface UpsertDoctorFormProps {
+  doctor?: typeof doctorsTable.$inferSelect;
+  onSuccess?: () => void;
+}
 
-const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
-  const form =
-    useForm <
-    z.infer <
-    typeof formSchema >>
-      {
-        resolver: zodResolver(formSchema),
-        defaultValues: {
-          name: "",
-          speciality: "",
-          appointmentPrice: 0,
-          availableFromWeekDay: "1",
-          availableToWeekDay: "5",
-          availableFromTime: "",
-          availableToTime: "",
-        },
-      };
+const UpsertDoctorForm = ({ doctor, onSuccess }: UpsertDoctorFormProps) => {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "",
+      speciality: "",
+      appointmentPrice: 0,
+      availableFromWeekDay: "1",
+      availableToWeekDay: "5",
+      availableFromTime: "",
+      availableToTime: "",
+    },
+  });
 
   const upsertDoctorAction = useAction(upsertDoctor, {
     onSuccess: () => {
@@ -97,9 +95,10 @@ const UpsertDoctorForm = ({ onSuccess }: UpsertDoctorFormProps) => {
     },
   });
 
-  const onSubmit = (values) => {
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     upsertDoctorAction.execute({
       ...values,
+      id: doctor?.id,
       availableFromWeekDay: parseInt(values.availableFromWeekDay),
       availableToWeekDay: parseInt(values.availableToWeekDay),
       appointmentPriceInCents: values.appointmentPrice * 100,
