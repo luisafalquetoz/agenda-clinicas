@@ -1,4 +1,4 @@
-export enum MedicalSpecialty {
+export enum Medicalspeciality {
   ALERGOLOGIA = "Alergologia",
   ANESTESIOLOGIA = "Anestesiologia",
   ANGIOLOGIA = "Angiologia",
@@ -50,9 +50,9 @@ export enum MedicalSpecialty {
   UROLOGIA = "Urologia",
 }
 
-export const medicalSpecialties = Object.entries(MedicalSpecialty).map(
+export const medicalSpecialties = Object.entries(Medicalspeciality).map(
   ([key, value]) => ({
-    value: MedicalSpecialty[key as keyof typeof MedicalSpecialty],
+    value: Medicalspeciality[key as keyof typeof Medicalspeciality],
     label: value,
   }),
 );
