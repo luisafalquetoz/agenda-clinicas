@@ -435,16 +435,16 @@ const UpsertDoctorForm = ({
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <Button variant="outline" className="text-red-500">
-                    <TrashIcon /> Deletar médico
+                    <TrashIcon /> Excluir médico
                   </Button>
                 </AlertDialogTrigger>
                 <AlertDialogContent>
                   <AlertDialogHeader>
                     <AlertDialogTitle>
-                      Tem certeza que deseja deletar esse médico?
+                      Tem certeza que deseja excluir esse médico?
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                      Esta ação não pode ser revertida. Isso irá deletar o
+                      Esta ação não pode ser revertida. Isso irá excluir o
                       médico e todas as consultas agendadas.
                     </AlertDialogDescription>
                   </AlertDialogHeader>
@@ -454,7 +454,7 @@ const UpsertDoctorForm = ({
                       onClick={handleDeleteDoctorClick}
                       className="bg-red-500 hover:bg-red-700"
                     >
-                      Deletar
+                      Excluir
                     </AlertDialogAction>
                   </AlertDialogFooter>
                 </AlertDialogContent>
