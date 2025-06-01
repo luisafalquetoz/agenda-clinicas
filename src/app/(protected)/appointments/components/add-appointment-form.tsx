@@ -96,6 +96,7 @@ const AddAppointmentForm = ({
         date: dayjs(selectedDate).format("YYYY-MM-DD"),
         doctorId: selectedDoctorId,
       }),
+    enabled: !!selectedDate && !!selectedDoctorId,
   });
 
   useEffect(() => {
