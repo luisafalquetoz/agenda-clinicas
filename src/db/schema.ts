@@ -128,7 +128,7 @@ export const doctorsTable = pgTable("doctors", {
 
 export const doctorsTableRelations = relations(
   doctorsTable,
-  ({ one, many }) => ({
+  ({ many, one }) => ({
     clinic: one(clinicsTable, {
       fields: [doctorsTable.clinicId],
       references: [clinicsTable.id],
