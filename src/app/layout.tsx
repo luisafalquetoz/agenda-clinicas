@@ -13,7 +13,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Agendamento Clínicas",
+  title: "Dr. Agenda",
   description: "Agendamento de consultas para clínicas médicas",
 };
 
